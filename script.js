@@ -32,12 +32,36 @@ function populateDisplay(event) {
     let char = event.target.textContent;
     let lastChar = displayText.slice(-1);
     if (!(["+", "-", "*", "/"].includes(char) && ["+", "-", "*", "/"].includes(lastChar))) {
+        let num = displayText.split(/(\+-\*\/)/).length - 1;
+        if (num === 1) {
+            calculate(displayText);
+            return;
+        }
         displayText += char;
         displaySpan.textContent = displayText;
     }
 }
 
-function calculate() {
+function calculate(displayText) {
+    if (displayText.includes("+")) {
+        let op = "+"
+
+    } else if (displayText.includes("-")) {
+        let op = "-"
+    } else if (displayText.includes("*")) {
+        let op = "*"
+    } else if (displayText.includes("/")) {
+        let op = "/"
+    } else {
+        console.log("ERROR");
+    }
+    let a = displayText.split(op)[0];
+    let b = displayText.split(op)[1];
+    let result = operate(op, a, b);
+    // start here!
+}
+
+function equals() {
 
 }
 
@@ -56,7 +80,7 @@ let buttons = document.querySelector(".buttons");
 let allButtons = buttons.querySelectorAll("button");
 allButtons.forEach(button => {
     if (button.id === "equals") {
-        button.addEventListener("click", calculate);
+        button.addEventListener("click", equals);
     } else {
         button.addEventListener("click", populateDisplay);
     }
