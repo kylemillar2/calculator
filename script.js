@@ -22,9 +22,9 @@ function operate(op, a, b) {
             return add(a, b);
         case "-":
             return subtract(a, b);
-        case "*":
+        case "x":
             return multiply(a, b);
-        case "/":
+        case "÷":
             return divide(a, b);
     }
 }
@@ -33,8 +33,8 @@ function populateDisplay(event) {
     let displayText = displaySpan.textContent;
     let char = event.target.textContent;
     let lastChar = displayText.slice(-1);
-    if (!(["+", "-", "*", "/"].includes(char) && ["+", "-", "*", "/"].includes(lastChar))) {
-        let num = displayText.split(/(\+-\*\/)/).length - 1;
+    if (!(["+", "-", "x", "÷"].includes(char) && ["+", "-", "x", "÷"].includes(lastChar))) {
+        let num = displayText.split(/(\+-x÷)/).length - 1;
         if (num === 1) {
             calculate(displayText);
             return;
@@ -50,10 +50,10 @@ function calculate(displayText) {
         op = "+";
     } else if (displayText.includes("-")) {
         op = "-";
-    } else if (displayText.includes("*")) {
-        op = "*";
-    } else if (displayText.includes("/")) {
-        op = "/";
+    } else if (displayText.includes("x")) {
+        op = "x";
+    } else if (displayText.includes("÷")) {
+        op = "÷";
     } else {
         console.log("ERROR");
         return;
