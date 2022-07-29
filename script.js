@@ -15,6 +15,8 @@ function divide(a, b) {
 }
 
 function operate(op, a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
     switch (op) {
         case "+":
             return add(a, b);
@@ -43,26 +45,29 @@ function populateDisplay(event) {
 }
 
 function calculate(displayText) {
+    let op;
     if (displayText.includes("+")) {
-        let op = "+"
-
+        op = "+";
     } else if (displayText.includes("-")) {
-        let op = "-"
+        op = "-";
     } else if (displayText.includes("*")) {
-        let op = "*"
+        op = "*";
     } else if (displayText.includes("/")) {
-        let op = "/"
+        op = "/";
     } else {
         console.log("ERROR");
+        return;
     }
     let a = displayText.split(op)[0];
     let b = displayText.split(op)[1];
     let result = operate(op, a, b);
-    // start here!
+    
+    displaySpan.textContent = result;
 }
 
 function equals() {
-
+    let displayText = displaySpan.textContent;
+    calculate(displayText);
 }
 
 function clear() {
