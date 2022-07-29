@@ -33,9 +33,19 @@ function populateDisplay(event) {
     let displayText = displaySpan.textContent;
     let char = event.target.textContent;
     let lastChar = displayText.slice(-1);
-    if (!(["+", "-", "x", "÷"].includes(char) && ["+", "-", "x", "÷"].includes(lastChar))) {
-        let num = displayText.split(/(\+-x÷)/).length - 1;
-        if (num === 1) {
+    let numOfOps = displayText.split(/[\+\-x÷]/).filter(Boolean).length - 1;
+
+    if (["+", "-", "x", "÷"].includes(char) && numOfOps === 1) { // if there is already an operator
+        console.log("test");
+        calculate(displayText);
+        displaySpan.textContent += char;
+        return;
+    }
+
+    if (!(["+", "-", "x", "÷"].includes(char)
+        && ["+", "-", "x", "÷"].includes(lastChar))) {
+
+        if (numOfOps === 1) {
             calculate(displayText);
             return;
         }
