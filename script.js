@@ -43,9 +43,14 @@ function populateDisplay(event) {
         return;
     }
 
+    if (char === "-") {
+        displayText += char;
+        displaySpan.textContent = displayText;
+        return;
+    }
+
     // checks for double operators and operators at the start of the equation
-    if (!(["+", "-", "x", "÷"].includes(char)
-        && ["+", "-", "x", "÷"].includes(lastChar))
+    if (!(["+", "-", "x", "÷"].includes(char) && ["+", "-", "x", "÷"].includes(lastChar))
         && !(["+", "x", "÷"].includes(char) && lastChar === "")) {
 
         if (numOfOps === 1) {
@@ -67,22 +72,44 @@ function calculate(displayText) {
         displayText = displayText.slice(1);
     }
 
-    if (displayText.includes("+")) {
+    let negativeSecondNumber = true;
+
+    if (displayText.includes("+-")) {
         op = "+";
-    } else if (displayText.includes("-")) {
+    } else if (displayText.includes("--")) {
         op = "-";
-    } else if (displayText.includes("x")) {
+    } else if (displayText.includes("x-")) {
         op = "x";
-    } else if (displayText.includes("÷")) {
+    } else if (displayText.includes("÷-")) {
         op = "÷";
     } else {
         console.log("ERROR");
         return;
     }
-    let a = displayText.split(op)[0];
-    let b = displayText.split(op)[1];
 
-    if (displayTextTemp) {
+    if (!op) {
+        negativeSecondNumber = false;
+        if (displayText.includes("+")) {
+            op = "+";
+        } else if (displayText.includes("-")) {
+            op = "-";
+        } else if (displayText.includes("x")) {
+            op = "x";
+        } else if (displayText.includes("÷")) {
+            op = "÷";
+        } else {
+            console.log("ERROR");
+            return;
+        }
+    }
+
+    let [a, ...b] = displayText.split(op); // first occurrence
+    if (b.length > 1){ // if there is an empty element, b was negative
+        b = b.join("-");
+    }
+    console.log(a,b);
+
+    if (displayTextTemp) { // add negative sign to number
         a = firstChar + a;
         displayText = displayTextTemp;
     }
