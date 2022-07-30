@@ -29,9 +29,15 @@ function operate(op, a, b) {
     }
 }
 
-function populateDisplay(event) {
+function populateDisplay(event, key=false) {
+    let char;
+    if (key === true){
+        char = event.key
+    } else {
+        char = event.target.textContent;
+    }
     let displayText = displaySpan.textContent;
-    let char = event.target.textContent;
+
     let lastChar = displayText.slice(-1);
     let secondLastChar = displayText.slice(-2, -1);
     let numOfOps = displayText.split(/[\+\-x÷]/).filter(Boolean).length - 1;
@@ -152,6 +158,21 @@ function del() {
     let displayText = displaySpan.textContent;
     displaySpan.textContent = displayText.slice(0, -1);
 }
+
+document.addEventListener("keydown", event => {
+    let possibleKeys = ["7", "8", "9", "+",
+                        "4", "5", "6", "-", "1", "2", "3",
+                        "x", ".", "0", "/"];
+    if (possibleKeys.includes(event.key)) {
+        populateDisplay(event);
+    } else if (event.key === "c") {
+        clear();
+    } else if (event.key === "Delete") {
+        del();
+    } else if (event.key === "=") {
+        equals();
+    }
+});
 
 let displaySpan = document.querySelector("#current");
 let prevSpan = document.querySelector("#prev");
