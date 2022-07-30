@@ -1,3 +1,3 @@
 TODO:
 
-Implement negative numbers for 2nd value
+Stop more than 2 subtract symbols being added
