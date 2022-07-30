@@ -1,10 +1,8 @@
 function add (a, b) {
-    console.log(a, b);
     return a + b;
 }
 
 function subtract(a, b) {
-    console.log(a, b);
     return a - b;
 }
 
@@ -39,7 +37,7 @@ function populateDisplay(event) {
     let numOfOps = displayText.split(/[\+\-x÷]/).filter(Boolean).length - 1;
 
     // replaces number 0
-    if (displayText === "0" && !["+", "-", "x", "÷"].includes(char)) {
+    if (displayText === "0" && !["+", "-", "x", "÷", "."].includes(char)) {
         displayText = char;
         displaySpan.textContent = displayText;
         return;
@@ -51,6 +49,16 @@ function populateDisplay(event) {
         return;
     }
 
+     if (char === "."){
+        let split = displayText.split(".");
+
+        // if there are already 2 decimals, or if there is one decimal without an operator
+        if (split.length === 3
+            || (split.length === 2 && !["+", "-", "x", "÷"].some(el => split[1].includes(el)))) {
+            return;
+        }
+     }
+
     // prevents double negatives at the start and triple negatives in the middle
     if (char === "-" && lastChar === "-"
         && secondLastChar !== "" && secondLastChar !== "-") {
@@ -60,11 +68,12 @@ function populateDisplay(event) {
     }
 
     // checks for double operators and operators at the start of the equation
+    // allows negatives and decimals after another operator
     if (!(["+", "-", "x", "÷"].includes(char) && ["+", "-", "x", "÷"].includes(lastChar))
-        && !(["+", "x", "÷"].includes(char) && lastChar === "")) {
+        && !(["+", "x", "÷"].includes(char) && lastChar === "")
+        && !(char === "." && lastChar === ".")) {
 
         if (numOfOps === 1 && ["+", "-", "x", "÷"].includes(char)) {
-            console.log("here");
             calculate(displayText);
             return;
         } else {
@@ -107,7 +116,7 @@ function calculate(displayText) {
         } else if (displayText.includes("÷")) {
             op = "÷";
         } else {
-            console.log("ERROR 2");
+            console.log("ERROR");
             return;
         }
     }
@@ -116,7 +125,7 @@ function calculate(displayText) {
     if (b.length > 1){ // if there is an empty element, b was negative
         b = b.join("-");
     }
-    console.log(a,b);
+    // console.log(a,b);
 
     if (displayTextTemp) { // add negative sign to number
         a = firstChar + a;
