@@ -41,7 +41,8 @@ button {
 .display {
     display: flex;
     flex-direction: column;
-    height: 20%;
+    flex-wrap: wrap;
+    min-height: 20%;
     width: 100%;
     font-size: 3em;
 }
@@ -49,10 +50,19 @@ button {
 .display > span {
     margin: auto 8px 0 auto;
     height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    word-wrap: normal;
+    width: 100%;
 }
 
 #prev {
     font-size: 0.6em;
     height: 40%;
     padding-top: 8px;
+}
+
+#current {
+    word-wrap: normal;
+    width: 100%
 }

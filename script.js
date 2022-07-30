@@ -164,12 +164,12 @@ document.addEventListener("keydown", event => {
                         "4", "5", "6", "-", "1", "2", "3",
                         "x", ".", "0", "/"];
     if (possibleKeys.includes(event.key)) {
-        populateDisplay(event);
+        populateDisplay(event, true);
     } else if (event.key === "c") {
         clear();
-    } else if (event.key === "Delete") {
+    } else if (event.key === "Backspace") {
         del();
-    } else if (event.key === "=") {
+    } else if (event.key === "Enter") {
         equals();
     }
 });
