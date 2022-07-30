@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return b === 0 ? "error: divide by 0" : a /b;
 }
 
 function operate(op, a, b) {
@@ -141,7 +141,12 @@ function calculate(displayText) {
     let result = operate(op, a, b);
     
     prevSpan.textContent = displayText;
-    displaySpan.textContent = Math.round(result * 100) / 100;
+
+    if (result === "error: divide by 0") {
+        displaySpan.textContent = result;
+    } else {
+        displaySpan.textContent = Math.round(result * 100) / 100;
+    }
 }
 
 function equals() {
