@@ -82,9 +82,6 @@ function calculate(displayText) {
         op = "x";
     } else if (displayText.includes("÷-")) {
         op = "÷";
-    } else {
-        console.log("ERROR");
-        return;
     }
 
     if (!op) {
@@ -98,7 +95,7 @@ function calculate(displayText) {
         } else if (displayText.includes("÷")) {
             op = "÷";
         } else {
-            console.log("ERROR");
+            console.log("ERROR 2");
             return;
         }
     }
@@ -117,7 +114,7 @@ function calculate(displayText) {
     let result = operate(op, a, b);
     
     prevSpan.textContent = displayText;
-    displaySpan.textContent = result;
+    displaySpan.textContent = Math.round(result * 100) / 100;
 }
 
 function equals() {
