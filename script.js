@@ -1,8 +1,10 @@
 function add (a, b) {
+    console.log(a, b);
     return a + b;
 }
 
 function subtract(a, b) {
+    console.log(a, b);
     return a - b;
 }
 
@@ -41,8 +43,10 @@ function populateDisplay(event) {
         return;
     }
 
+    // checks for double operators and operators at the start of the equation
     if (!(["+", "-", "x", "÷"].includes(char)
-        && ["+", "-", "x", "÷"].includes(lastChar))) {
+        && ["+", "-", "x", "÷"].includes(lastChar))
+        && !(["+", "x", "÷"].includes(char) && lastChar === "")) {
 
         if (numOfOps === 1) {
             calculate(displayText);
@@ -55,6 +59,14 @@ function populateDisplay(event) {
 
 function calculate(displayText) {
     let op;
+    let firstChar = displayText[0];
+    let displayTextTemp;
+
+    if (firstChar === "-") { // handle negative number
+        displayTextTemp = displayText;
+        displayText = displayText.slice(1);
+    }
+
     if (displayText.includes("+")) {
         op = "+";
     } else if (displayText.includes("-")) {
@@ -69,6 +81,12 @@ function calculate(displayText) {
     }
     let a = displayText.split(op)[0];
     let b = displayText.split(op)[1];
+
+    if (displayTextTemp) {
+        a = firstChar + a;
+        displayText = displayTextTemp;
+    }
+
     let result = operate(op, a, b);
     
     prevSpan.textContent = displayText;
