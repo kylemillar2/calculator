@@ -32,7 +32,7 @@ function operate(op, a, b) {
 function populateDisplay(event, key=false) {
     let char;
     if (key === true){
-        char = event.key
+        event.key === "/" ? char = "÷" : char = event.key;
     } else {
         char = event.target.textContent;
     }
@@ -162,9 +162,11 @@ function del() {
 document.addEventListener("keydown", event => {
     let possibleKeys = ["7", "8", "9", "+",
                         "4", "5", "6", "-", "1", "2", "3",
-                        "x", ".", "0", "/"];
+                        "x", ".", "0"];
     if (possibleKeys.includes(event.key)) {
         populateDisplay(event, true);
+    } else if (event.key === "/") {
+        populateDisplay(event, true)
     } else if (event.key === "c") {
         clear();
     } else if (event.key === "Backspace") {
