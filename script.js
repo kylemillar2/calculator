@@ -36,7 +36,6 @@ function populateDisplay(event) {
     let numOfOps = displayText.split(/[\+\-x÷]/).filter(Boolean).length - 1;
 
     if (["+", "-", "x", "÷"].includes(char) && numOfOps === 1) { // if there is already an operator
-        console.log("test");
         calculate(displayText);
         displaySpan.textContent += char;
         return;
@@ -72,6 +71,7 @@ function calculate(displayText) {
     let b = displayText.split(op)[1];
     let result = operate(op, a, b);
     
+    prevSpan.textContent = displayText;
     displaySpan.textContent = result;
 }
 
@@ -82,6 +82,7 @@ function equals() {
 
 function clear() {
     displaySpan.textContent = "";
+    prevSpan.textContent = "";
 }
 
 function del() {
@@ -89,7 +90,8 @@ function del() {
     displaySpan.textContent = displayText.slice(0, -1);
 }
 
-let displaySpan = document.querySelector(".display span");
+let displaySpan = document.querySelector("#current");
+let prevSpan = document.querySelector("#prev");
 
 let buttons = document.querySelector(".buttons");
 let allButtons = buttons.querySelectorAll("button");
@@ -105,8 +107,8 @@ let clearDel = document.querySelector(".clear-del");
 let clearDelButtons = clearDel.querySelectorAll("button");
 clearDelButtons.forEach(button => {
     if (button.id === "clear") {
-        button.addEventListener("click", clear)
+        button.addEventListener("click", clear);
     } else if (button.id === "del") {
-        button.addEventListener("click", del)
+        button.addEventListener("click", del);
     }
 })
