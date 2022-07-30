@@ -35,7 +35,15 @@ function populateDisplay(event) {
     let displayText = displaySpan.textContent;
     let char = event.target.textContent;
     let lastChar = displayText.slice(-1);
+    let secondLastChar = displayText.slice(-2, -1);
     let numOfOps = displayText.split(/[\+\-x÷]/).filter(Boolean).length - 1;
+
+    // replaces number 0
+    if (displayText === "0" && !["+", "-", "x", "÷"].includes(char)) {
+        displayText = char;
+        displaySpan.textContent = displayText;
+        return;
+    }
 
     if (["+", "-", "x", "÷"].includes(char) && numOfOps === 1) { // if there is already an operator
         calculate(displayText);
@@ -43,7 +51,9 @@ function populateDisplay(event) {
         return;
     }
 
-    if (char === "-") {
+    // prevents double negatives at the start and triple negatives in the middle
+    if (char === "-" && lastChar === "-"
+        && secondLastChar !== "" && secondLastChar !== "-") {
         displayText += char;
         displaySpan.textContent = displayText;
         return;
@@ -53,12 +63,14 @@ function populateDisplay(event) {
     if (!(["+", "-", "x", "÷"].includes(char) && ["+", "-", "x", "÷"].includes(lastChar))
         && !(["+", "x", "÷"].includes(char) && lastChar === "")) {
 
-        if (numOfOps === 1) {
+        if (numOfOps === 1 && ["+", "-", "x", "÷"].includes(char)) {
+            console.log("here");
             calculate(displayText);
             return;
+        } else {
+            displayText += char;
+            displaySpan.textContent = displayText;
         }
-        displayText += char;
-        displaySpan.textContent = displayText;
     }
 }
 
