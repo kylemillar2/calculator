@@ -1,2 +1,1 @@
-TODO:
-CSS styling
+A fully functioning calculator with decimals, negative numbers, etc. fully implemented as well.
