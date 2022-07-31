@@ -4,44 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <div class="display">
-            <p id="prev"></p>
-            <p id="current"></p>
-        </div>
-        <div class="clear-del">
-            <button id="clear">CLEAR</button>
-            <button id="del">DELETE</button>
-        </div>
-        <div class="buttons">
-            <div class="row-1">
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>+</button>
+        <div class="calculator">
+            <div class="display-container">
+                <div class="display">
+                    <p id="prev"></p>
+                    <p id="current"></p>
+                </div>
             </div>
-            <div class="row-2">
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>-</button>
-            </div>
-            <div class="row-3">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>x</button>
-            </div>
-            <div class="row-4">
-                <button>.</button>
-                <button>0</button>
-                <button id="equals">=</button>
-                <button>÷</button>
+            <div class="button-container">
+                <div class="clear-del">
+                    <button id="clear">AC</button>
+                    <button id="del">C</button>
+                </div>
+                <div class="buttons">
+                    <div class="row-1">
+                        <button>7</button>
+                        <button>8</button>
+                        <button>9</button>
+                        <button class="op">+</button>
+                    </div>
+                    <div class="row-2">
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button class="op">-</button>
+                    </div>
+                    <div class="row-3">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button class="op">x</button>
+                    </div>
+                    <div class="row-4">
+                        <button class="op">.</button>
+                        <button>0</button>
+                        <button id="equals" class="op">=</button>
+                        <button class="op">÷</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
